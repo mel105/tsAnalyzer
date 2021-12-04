@@ -1,10 +1,5 @@
 function [qData] = quantile(data, p)
-  % funkcicka spocita p-kvantil. Poznamka, p = 0.5 = median (snad to takto vychadza. Treba kontrola)
-  
-  arguments
-    data (:,1) double {mustBeNonempty};
-    p (:,:) double {mustBePositive, mustBeInRange(p, 0, 1)};
-  end
+  % QUANTILE funkcia spocita p-kvantil. Poznamka, p = 0.5 = median
   
   dataLen = size(data, 1);
   dataSort = sort(data, 1);

@@ -1,6 +1,10 @@
-function [elemYDFT, elemFreq, estPerVec] = fftElemTS(elemTs, wcorr)
-  % FFTELEMTS vykona to, ze kazdu jednu komponentu pretransformuje do frekvencneho spektra a vysledkom
-  % je pole elemFreq, ktore ma tolko stlpcov, kolko je stlpcov elemTS
+function [elemYDFT, elemFreq, estPerVec] = fftElemTS(elemTs)
+  % FFTELEMTS vykona to, ze kazdu jednu komponentu pretransformuje do frekvencneho spektra a 
+  % vysledkom je pole elemFreq a elemYDFT, ktore ma tolko stlpcov, kolko je stlpcov elemTS. Vsupom 
+  % je teda matica obsahujuca vyznamne komponenty ziskane z SSA spracovania a vystupom je pole 
+  % elemYDFT, ktore obsahuje diskretnu Fourierovu transformaciu, elemFreq, obsahuje frekvencie a 
+  % estPerVec, ktore obsahuje hrube odhady najvyznamnejsich period v danom frekvencnom spektre (max 
+  % peak).
 
   [nRow, nCol] = size(elemTs);
 
@@ -15,7 +19,8 @@ function [elemYDFT, elemFreq, estPerVec] = fftElemTS(elemTs, wcorr)
     nWindow = numel(curElem);
 
     % Hamming alebo ine filtracne okno sa pouziva k tomu, aby sa odstranil pripadny aliasing, t.j.
-    % oneskorenie sa frekvencii...
+    % oneskorenie sa frekvencii. Potlaca tiez postranne laloky a tie vyznamne peaky potom nie su
+    % skreslene.
     window = hamming(nWindow, 'Alpha', 0.54);
     filtElemTS = window .* curElem;
     nFiltElemTS = numel(filtElemTS);

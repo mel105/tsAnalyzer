@@ -1,9 +1,9 @@
 function decisionVal = chi2Decision(inputVal, cdf, nDoF)
-  % chi2Decision porovnava vstupnu hodnotu voci kriticke hodnote Chi2 rozdelenia
+  % CHI2DECISION porovnava vstupnu hodnotu voci kritickej hodnote chi2 rozdelenia
   
   % Chi kvadrat hodnota
 	chi2Value = chi2Quantile(cdf, nDoF);
 	
-	% Porovnani
+	% Porovnanie
 	decisionVal = (inputVal < chi2Value);
 end

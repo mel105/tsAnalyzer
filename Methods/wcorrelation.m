@@ -1,6 +1,6 @@
-function [Wcorr] = wcorrelation(elemTS, N, L, K, M)
- % WCORRELATION funkcia vrati maticu -Wcorr-, ktora obsahuje vzajomne vahovane korelacie medzi
- % jednotlivymi hlavnymi komponentami -elemTS.
+function [wcorr] = wcorrelation(elemTS, N, L, K, M)
+ % WCORRELATION funkcia vrati maticu, wcorr, ktora obsahuje vzajomne vahovane korelacie medzi
+ % jednotlivymi hlavnymi komponentami elemTS.
 
   weights = [1:L,L*ones(1,K-L-1),N:-1:K];
   normElemTS = zeros(1,M);
@@ -16,5 +16,5 @@ function [Wcorr] = wcorrelation(elemTS, N, L, K, M)
 
   weightsElemTSElemTS = reshape(weightsElemTSElemTS, M, M);
 
-  Wcorr = abs(weightsElemTSElemTS) ./ (normElemTS .* normElemTS');
+  wcorr = abs(weightsElemTSElemTS) ./ (normElemTS .* normElemTS');
 end

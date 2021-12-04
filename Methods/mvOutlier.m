@@ -1,7 +1,6 @@
-function res = mvOutlier(x, chiProb, mPlots)
+function res = mvOutlier(inpData, chiProb, mPlots)
   % mvOutlier odhadne hodnotym podozrive z odlahlosti. Postup je zalozeny na odhade kvadratu 
-  % Mahalanobisovej vzdalenosti, pre ktory plati 
-  % predpis je dany ve tvaru
+  % Mahalanobisovej vzdalenosti, pre ktory plati predpis v tvare
   % 
   %     md2 = (xi - mX) * inv(C) * (xi - mX)', kde
   %        xi... je prvok matice X, 
@@ -11,31 +10,33 @@ function res = mvOutlier(x, chiProb, mPlots)
   %        ' ... znaci transponovanu matici.
   % 
   % Porovnavaju sa odhady Mahalanobisovych vzdalenosti s kritickou hranicou, ktora je odhadnuta na 
-  % zaklade chi-kvadrat rozdelenia. Mahalanobisovy vzdalenosti, ktere prekroci odhadnutou kritickou
-  % hodnotu su podezrive z odlehlosti
+  % zaklade chi-kvadrat rozdelenia. Mahalanobisove vzdalenosti, ktere prekrocia odhadnutu kriticku
+  % hodnotu su potom podezrive z odlehlosti. Je to viacparametricka metoda, a teda lze pouzit aj
+  % viacrozmernu maticu inpData (nemusi byt nutne vektor).
   
   % Overenie rozmeru
-  [nData, pDim] = size(x);
+  [nData, pDim] = size(inpData);
   if nData < pDim
   
-    x = x';
-    [nData, pDim] = size(x);
+    inpData = inpData';
+    [nData, pDim] = size(inpData);
     
   end
   
-  % Vypocet
-  rMat = x - median(x, 'omitnan');
+  % Vypocet. Data by nemali obsahovat nan hodnoty. Asi uz nutne osetrit este pred pouzitm funkcie.
+  % Obecne, chybajuce data, ci nany by sa mali vhodne aproximovat.
+  rMat = inpData - median(inpData, 'omitnan'); % mozno v R2007 a starsej omitnan neexistuje.
   
   % Kontrola vycentrovanej rMat
   chSum = sum(rMat,1);
   id = find(chSum == 0, 1);
   if ~isempty(id)
     
-    rMat(:,id) = rMat(:,id) + rand()*0.0001;
+    rMat(:,id) = rMat(:,id) + rand() * 0.0001;
   end
     
   %covMatX = ((rMat' * rMat) / (nData - 1)).*ones(pDim , pDim, nData);
-  covMatX = (rMat'*rMat)/(nData-1);
+  covMatX = (rMat' * rMat) / (nData - 1);
   
   % Odhad Mahalanobisovych vzdalenosti
   mDSq = diag(rMat / (covMatX) * rMat');
@@ -55,7 +56,7 @@ function res = mvOutlier(x, chiProb, mPlots)
       warning ('ERA:mvOutlier:plotLimitation', 'Kresli maximalne 5-parametru!')
     else
   
-      plotSituation(x, mDSq, vecOutliers, critVal)
+      plotSituation(inpData, mDSq, vecOutliers, critVal)
     end
   end
     

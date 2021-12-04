@@ -1,9 +1,7 @@
 function critVal = chi2Quantile(cdf, nDoF)
-  % chi2Quantile vrati kriticku hodnotu ch2 rozdelenia pre danu pravdepodobnost a poctu stpna
-  % volnosti.
-  %
-  % [1] Best and Roberts (1975), The Percentage Points of the Chi-Squared Distribution,
-  % In: Algorithm AS 91, Applied Statistics, Volume 24, Number ?, pages 385-390.
+  % CHI2QUANTILE vrati kriticku hodnotu ch2 rozdelenia pre danu pravdepodobnost a poctu stpna
+  % volnosti. Prevzata funkcia!
+ 
   
   if nDoF == 2
     

@@ -1,7 +1,10 @@
 function window = hamming(windowLen, sflag, NameValueArgs)
-  % HAMMING funkcia ocisti vstupny signal napr. o aliasing.
+  % HAMMING funkcia ocisti vstupny signal napr. o aliasing. Patri medzi tzv. vahovacie okna a
+  % pouziva sa vtedy, ked je snaha potlacit vplyv postrannnych lalokov vo frekvencnych oknach. Okien
+  % je cela rada, ale zbeznym prelistovanim internetu, Hammingove okno sa pouziva asi najcastiejsie.
   
-  alpha = NameValueArgs.Alpha; % 25 / 46 cca 0.54;
+  %alpha = NameValueArgs.Alpha; % 25 / 46 cca 0.54;
+  alpha = NameValueArgs; % 25 / 46 cca 0.54;
   beta  = 1 - alpha;
   
   if strcmp(sflag, 'symmetric')
