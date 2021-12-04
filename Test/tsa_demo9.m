@@ -1,5 +1,5 @@
-% skript demonstruje pouzite SSA funkcie. SSA metoda je testovana na umelych data s rozlisenim
-% jeden den.
+% skript demonstruje pouzite SSA funkcie. SSA metoda je testovana na realnycha s datach danych z
+% numerickeho modelu pocasia a s rozlisenim 8 hodin.
 
 close all; 
 clear variables;
@@ -9,11 +9,12 @@ addpath(genpath(fullfile(thisFolder, "..", "Common")));
 addPaths();
 
 % nazov analyzovaneho suboru
-fileName = "cost.txt";
+fileName = "nwm.txt";
 
 % nacitanie dat a ich ulozenie do kontajnera table
 [data] = tsReader(fileName, false);
-X = data.data(:,3);
+X = data(:,1);
+
 % spracovanie casovej rady
 % odstranenie priemeru a normalizacia na std = 1
 X = X - mean(X);

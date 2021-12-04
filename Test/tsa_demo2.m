@@ -1,4 +1,4 @@
-% tsa demo 2: Umely signal
+% tsa demo 2: Setreny signal je umelo generovany.
 clear variables;
 close all;
 
@@ -17,15 +17,8 @@ noise = 2*(rand(200,1) - 0.5);
 
 signalVec = trend + seasonal1 + seasonal2 + noise;
 
-%figure; plot(signalVec, '-')
-
 signalVec = signalVec - mean(signalVec);
 signalVec = signalVec / std(signalVec);
 
-% matlabovska funkcia R2021b
-[LT,ST,R] = trenddecomp(signalVec);
-figure; plot([signalVec LT ST R]);
-legend("Data","Long-term","Seasonal1","Seasonal2","Remainder")
-
-% nasa funkcia
+% 
 SSA(signalVec, 'L', 20);
