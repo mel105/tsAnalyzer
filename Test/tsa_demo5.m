@@ -25,8 +25,9 @@ if ~isempty(nanidx)
 end
 
 % odsranenie odlahlych merani
-[resOut] = mvOutlier(X, 0.9, true);
-X(resOut.vecOutliersIdx) = [];
+%[resOut] = mvOutlier(X, 0.9, true);
+%X(resOut.vecOutliersIdx) = [];
+[X, screeningSummary] = screening(X, 0.9, true);
 
 X = X - mean(X, 'omitnan');
 X = X / std(X);
