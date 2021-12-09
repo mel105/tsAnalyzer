@@ -12,9 +12,23 @@ function [wcorr] = wcorrelation(elemTS, N, L, K, M)
 
   normElemTS = sqrt(normElemTS);
 
-  weightsElemTSElemTS = sum(weights(:) .* elemTS .* reshape(elemTS, N, 1, M), 1);
+  %
+  %W = sum(weights(:) .* elemTS .* reshape(elemTS, N, 1, M), 1);
+  %W = reshape(W, M, M);
 
-  weightsElemTSElemTS = reshape(weightsElemTSElemTS, M, M);
+  W = zeros(size(elemTS,2), size(elemTS,2));
+  for i = 1:size(elemTS,2)
+    for j = 1:size(elemTS,2)
+      
+      sm = 0;
+      for k = 1:size(elemTS,1)
 
-  wcorr = abs(weightsElemTSElemTS) ./ (normElemTS .* normElemTS');
+        sm = sm+(weights(1,k)*elemTS(k,i)*elemTS(k,j));
+      end
+      
+      W(i,j) = sm;
+    end
+  end
+  
+  wcorr = abs(W) ./ (normElemTS .* normElemTS');
 end
