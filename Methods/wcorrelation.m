@@ -30,5 +30,5 @@ function [wcorr] = wcorrelation(elemTS, N, L, K, M)
     end
   end
   
-  wcorr = abs(W) ./ (normElemTS .* normElemTS');
+  wcorr = abs(W)./(normElemTS.*normElemTS');
 end
