@@ -28,4 +28,8 @@ X = X / std(X);
 [outRes] = mvOutlier(X, 0.95, false);
 X(outRes.vecOutliersIdx) = [];
 
-SSA(X, "L", 260)
+% SSA
+SSA(X, 'L', 260)
+figure(2000); plot(X, '.')
+% 
+spectrogram(X)

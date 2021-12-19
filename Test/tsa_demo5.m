@@ -27,9 +27,13 @@ end
 % odsranenie odlahlych merani
 %[resOut] = mvOutlier(X, 0.9, true);
 %X(resOut.vecOutliersIdx) = [];
-[X, screeningSummary] = screening(X, 0.9, true);
+%[X, screeningSummary] = screening(X, 0.9, true);
 
 X = X - mean(X, 'omitnan');
 X = X / std(X);
 
-SSA(X, "L", 365)
+% SSA
+SSA(X, 'L', 365)
+figure(2000); plot(X, '.')
+% 
+spectrogram(X)

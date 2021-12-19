@@ -20,4 +20,8 @@ X = data(:,1);
 X = X - mean(X);
 X = X / std(X);
 
-SSA(X, "L", 365)
+% SSA
+SSA(X, 'L', 365)
+figure(2000); plot(X, '.')
+% 
+spectrogram(X)

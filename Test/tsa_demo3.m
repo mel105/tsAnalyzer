@@ -22,3 +22,6 @@ X = X/std(X,1);
 
 % SSA
 SSA(X, 'L', L)
+figure(2000); plot(X, '.')
+% 
+spectrogram(X)

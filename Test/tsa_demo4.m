@@ -11,14 +11,15 @@ seasonal1 = sin(2*pi*t/period1);
 seasonal2 = 0.5*sin(2*pi*t/period2);
 noise = 2*(randn(length(t),1) - 0);
 
-signalVec = trend + seasonal1 + seasonal2 + noise;
+X= trend + seasonal1 + seasonal2 + noise;
 
-signalVec = signalVec - mean(signalVec);
-signalVec = signalVec / std(signalVec);
+X = X - mean(X);
+X = X / std(X);
 
 
 %
-SSA(signalVec, 'L', 20);
-
-
+SSA(X, 'L', 30)
+figure(2000); plot(X, '.')
+% 
+spectrogram(X)
 
