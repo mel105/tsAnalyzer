@@ -33,7 +33,7 @@ function [figA, figB, figC, figScrMat] = plotScreening(inpDistorData, inpScreenD
   end
 
   suspTimeVec = sort(suspTimeVec);
-  [suspIdx,~]=ismember(1:1:size(inpDistorData,1), suspTimeVec);
+  [suspIdx,iidx]=ismember(1:1:size(inpDistorData,1), suspTimeVec);
   suspVal = inpDistorData(suspIdx);
 
   % plot original situation

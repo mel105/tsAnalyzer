@@ -27,9 +27,7 @@ function [results] = SSA(data, varargin)
 
   % default nastavenie
   L = ceil(N/2)-1;
-  recoModel = "v4";
-  seasModels = 2;
-  
+    
   % parser a kontrola parametrov a prevzatie nastavenia
   iVar = 1;
   while iVar <= length(varargin)
@@ -39,14 +37,6 @@ function [results] = SSA(data, varargin)
       if varargin{iVar} == "L"
 
         L = varargin{iVar+1};
-        iVar = iVar + 1;
-      elseif varargin{iVar} == "recoModel"
-
-        recoModel = varargin{iVar+1};
-        iVar = iVar + 1;
-      elseif varargin{iVar} == "seasModels"
-
-        seasModels = varargin{iVar+1};
         iVar = iVar + 1;
       else
 
@@ -80,7 +70,7 @@ function [results] = SSA(data, varargin)
   plotPrincipalComponents(princCompTS);
 
   [elemYDft, elemFreq, estPerVec] = fftElemTS(princCompTS);
-  plotPCvsFreq(data, princCompTS, elemYDft, elemFreq, estPerVec);
+  plotPCvsFreq(princCompTS, elemYDft, elemFreq, estPerVec);
  
   % Rekonstrukcia, resp. odhad trendu, sezonnych komponent a residua
   [LT, ST, R] = reconstruction(data, princCompTS, wcorrMatrix, estPerVec);
@@ -91,5 +81,4 @@ function [results] = SSA(data, varargin)
     "longTerm", LT, ...
     "seasonalTerm", ST, ...
     "residuals", R);
-  
 end

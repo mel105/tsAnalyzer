@@ -18,7 +18,6 @@ X = data(:,2);
 X = X - mean(X);
 X = X / std(X);
 
-
 %
-%SSA(X)
+SSA(X)
 
